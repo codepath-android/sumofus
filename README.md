@@ -1,8 +1,8 @@
 # Final Project - *Sum of Us*
 
-**Sum of Us** is an android app that allows a user to view, sign and share a campaings (or petitions) sponsored by the Non-profit organization  [Sum of Us](http://sumofus.org). The app utilizes data from [SUM OF US](sumofus.org).
+**Sum of Us** is an android app that allows a user to view, sign and share a campaings (or petitions) sponsored by the Non-profit organization  [Sum of Us](http://sumofus.org). The app utilizes data from the non-profit organization.
 
-Time spent: **X** hours spent in total
+Time spent: **1** hours spent in total
 
 ## User Stories
 
@@ -19,7 +19,6 @@ The following functionality is completed:
 * [ ] User can navigate to **view their own profile**
   * [ ] User can modify profile information
 * [ ] User can make a donation to Sum of Us
- * [ ] 
 * [ ] Settings and preferences allow the user to sign a petition by tapping on a 'Sign' button (perhaps a heart or a star) without having to confirm?
 
 The following **optional** features could be implemented in a future release:
@@ -28,12 +27,9 @@ The following **optional** features could be implemented in a future release:
 * [ ] ALlow offline reading on favorite campaigns
 * [ ] Allow recurring donations
   * [ ] User can cancel a recurring donation to Sum of Us
-* [ ] User can search for campaigns (currently not implemented by Sum of Us)
-  * [ ] 
-* [ ] 
- * [ ] 
-* [ ] 
-* [ ] 
+* [ ] User can search for campaigns 
+  * [ ] User can browse campaign categories
+
 
 
 ## Video Walkthrough 
