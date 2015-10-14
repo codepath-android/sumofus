@@ -1,6 +1,6 @@
 # Final Project - *Sum of Us*
 
-**Sum of Us** is an android app that allows a user to view, sign and share a campaings (or petitions) sponsored by the Sum of Us Non-profit organization. The app utilizes data from [SUM OF US](sumofus.org).
+**Sum of Us** is an android app that allows a user to view, sign and share a campaings (or petitions) sponsored by the Non-profit organization  [Sum of Us](http://sumofus.org). The app utilizes data from [SUM OF US](sumofus.org).
 
 Time spent: **X** hours spent in total
 
