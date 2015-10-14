@@ -6,7 +6,7 @@ Time spent: **1** hours spent in total
 
 ## User Stories
 
-The following functionality is completed:
+The following functionality is proposed for implementation:
 
 * [ ] User can view a listing of campaigns
 * [ ] User can view details on a single campaign
