@@ -1,6 +1,6 @@
 # Final Project - *Sum of Us*
 
-**Sum of Us** is an android app that allows a user to view, sign and share a campaings (or petitions) sponsored by the Non-profit organization  [Sum of Us](http://sumofus.org). The app utilizes data from the non-profit organization.
+**Sum of Us** is an Android app that allows a user to view, sign and share a campaing (or petition) sponsored by the Non-profit organization  [Sum of Us](http://sumofus.org). The app utilizes data from the non-profit organization.
 
 Time spent: **1** hours spent in total
 
@@ -8,6 +8,9 @@ Time spent: **1** hours spent in total
 
 The following functionality is proposed for implementation:
 
+* [ ] Administrator can create a campaign
+* [ ] Administrator can attach a picture to the campaign
+* [ ] Administrator can send a Push Notification to registered users of a new campaigned available
 * [ ] User can view a listing of campaigns
 * [ ] User can view details on a single campaign
 * [ ] User can sign in / up to perform actions on campaigns
@@ -23,8 +26,8 @@ The following functionality is proposed for implementation:
 
 The following **optional** features could be implemented in a future release:
 
-* [ ] User can locate campaings based on geographical location, i.e. by city, state, country
-* [ ] ALlow offline reading on favorite campaigns
+* [ ] User can locate campaigns based on geographical location, i.e. by city, state, country
+* [ ] Allow offline reading on favorite campaigns
 * [ ] Allow recurring donations
   * [ ] User can cancel a recurring donation to Sum of Us
 * [ ] User can search for campaigns 
@@ -34,7 +37,7 @@ The following **optional** features could be implemented in a future release:
 
 ## Video Walkthrough 
 
-Not available yet:
+Not available yet.
 
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
