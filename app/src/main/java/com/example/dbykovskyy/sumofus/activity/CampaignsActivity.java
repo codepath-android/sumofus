@@ -9,7 +9,11 @@ import android.widget.ListView;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
+import com.parse.Parse;
+import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
+import com.parse.ParseCrashReporting;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,24 @@ public class CampaignsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_campaigns);
+
+        // Initializing Crash Reporting.
+        ParseCrashReporting.enable(this);
+
+        // Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        // Initialization code
+        Parse.initialize(this);
+
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        //  Public read access.
+        // defaultACL.setPublicReadAccess(true);
+        ParseACL.setDefaultACL(defaultACL, true);
+
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
 
         populateCampaigns();
 
