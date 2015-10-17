@@ -66,13 +66,14 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
         //setting up views
         viewHolder.tvShortCampaignDescription.setText(campaign.getShortDescription());
         viewHolder.ivCampaign.setImageResource(0);
+
         Picasso.with(getContext()).load(campaign.getImageUrl()).into(new com.squareup.picasso.Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
                 double width = bitmap.getWidth();
                 double height = bitmap.getHeight();
-                double [] newDimensions = calculateNewDimentions(width, height);
+                //double [] newDimensions = calculateNewDimentions(width, height);
 
                 viewHolder.pb.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.ivCampaign.setImageBitmap(bitmap);

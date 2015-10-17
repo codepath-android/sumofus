@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="Country">
+        <item>not selected</item>
+        <item>United States</item>
+        <item>Italy</item>
+        <item>France</item>
+        <item>Ukraine</item>
+    </string-array>
+
+
+</resources>
