@@ -43,7 +43,7 @@
         android:background="@color/orange"
         android:text="TAKE ACTION"
         android:textColor="@color/white"
-        android:id="@+id/button"
+        android:id="@+id/btTakeActionDetail"
         android:shadowRadius="5"
         android:layout_marginLeft="5dp"
         android:paddingLeft="4dp"

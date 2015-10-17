@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.example.dbykovskyy.sumofus.R;
 
@@ -13,6 +15,13 @@ public class SignPetitionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_petition);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spCounties);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Country, android.R.layout.simple_spinner_item); //android.R.layout.simple_spinner_item); // Create an ArrayAdapter using the string array and a default spinner layout
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // Specify the layout to use when the list of choices appears
+        spinner.setAdapter(adapter);
+
+
     }
 
     @Override
@@ -36,4 +45,6 @@ public class SignPetitionActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }
