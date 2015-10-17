@@ -31,22 +31,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initializing Crash Reporting.
-        ParseCrashReporting.enable(this);
-
-        // Local Datastore.
-        Parse.enableLocalDatastore(this);
-
-        // Initialization code
-        Parse.initialize(this);
-
-        ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        //  Public read access.
-        // defaultACL.setPublicReadAccess(true);
-        ParseACL.setDefaultACL(defaultACL, true);
-
-        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
         setContentView(R.layout.activity_campaign_detail);
         //finding views
