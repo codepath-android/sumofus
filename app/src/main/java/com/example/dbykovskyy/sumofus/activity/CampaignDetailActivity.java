@@ -14,6 +14,11 @@ import android.widget.TextView;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.utils.CustomProgress;
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseAnalytics;
+import com.parse.ParseCrashReporting;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 
 public class CampaignDetailActivity extends AppCompatActivity {
@@ -25,6 +30,24 @@ public class CampaignDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Initializing Crash Reporting.
+        ParseCrashReporting.enable(this);
+
+        // Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        // Initialization code
+        Parse.initialize(this);
+
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        //  Public read access.
+        // defaultACL.setPublicReadAccess(true);
+        ParseACL.setDefaultACL(defaultACL, true);
+
+        ParseAnalytics.trackAppOpenedInBackground(getIntent());
+
         setContentView(R.layout.activity_campaign_detail);
         //finding views
         tvCampaignText = (TextView)findViewById(R.id.tvCampaignTextDetail);

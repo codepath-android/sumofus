@@ -60,3 +60,15 @@ local.properties
 
 # PDT-specific
 .buildpath
+
+.idea/.name
+
+.idea/misc.xml
+
+.idea/modules.xml
+
+.idea/vcs.xml
+
+app/app.iml
+
+SumOfUs.iml
