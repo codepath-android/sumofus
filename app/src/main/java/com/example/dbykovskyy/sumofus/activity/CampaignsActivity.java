@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
+import com.parse.ParseAnalytics;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class CampaignsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_campaigns);
 
         populateCampaigns();
