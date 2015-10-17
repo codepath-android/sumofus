@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/SumOfUs.iml" filepath="$PROJECT_DIR$/SumOfUs.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sumofus.iml" filepath="$PROJECT_DIR$/sumofus.iml" />
     </modules>
   </component>
 </project>

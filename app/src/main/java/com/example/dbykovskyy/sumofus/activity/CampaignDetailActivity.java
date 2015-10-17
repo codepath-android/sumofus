@@ -1,5 +1,6 @@
 package com.example.dbykovskyy.sumofus.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -25,6 +28,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
     TextView tvCampaignText;
     ImageView ivCampaignImage;
     CustomProgress customProgress;
+    Button btSignPetition;
+
 
 
     @Override
@@ -37,6 +42,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
         tvCampaignText = (TextView)findViewById(R.id.tvCampaignTextDetail);
         ivCampaignImage = (ImageView)findViewById(R.id.ivCampaignDetail);
         customProgress = (CustomProgress)findViewById(R.id.pbGoal);
+        btSignPetition = (Button)findViewById(R.id.btTakeActionDetail);
 
         //getting intent
         Campaign campaign = (Campaign) getIntent().getSerializableExtra("camp");
@@ -48,13 +54,28 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         tvCampaignText.setMovementMethod(new ScrollingMovementMethod());
         tvCampaignText.setText(campaign.getLongDescription());
-        //setting up progress bar
 
+        //setting up progress bar
         customProgress.setProgressColor(getResources().getColor(R.color.green_500));
         customProgress.setProgressBackgroundColor(getResources().getColor(R.color.green_200));
         customProgress.setMaximumPercentage(1.0f);
         customProgress.useRoundedRectangleShape(30.0f);
         customProgress.setShowingPercentage(true);
+
+
+        btSignPetition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(CampaignDetailActivity.this, SignPetitionActivity.class);
+                CampaignDetailActivity.this.startActivity(i);
+
+
+            }
+        });
+
+
+
 
     }
 
@@ -76,7 +97,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
