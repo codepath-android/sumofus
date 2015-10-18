@@ -48,7 +48,7 @@ public class CampaignsActivity extends AppCompatActivity {
 
         initializeParse();
         createParseObject();
-        readParseObject();
+       // readParseObject();
 
     }
 
@@ -105,21 +105,12 @@ public class CampaignsActivity extends AppCompatActivity {
 
     public void createParseObject() {
 
-        ParseObject user = new ParseObject("User");
-        user.put("name", "Alberto C");
+        ParseObject user = new ParseObject("Supporter");
+        user.put("name", "Alberto Campos");
         user.put("screenname", "xopmac");
         user.put("email", "xopmac@gmail.com");
         user.put("isAdmin", true);
         user.saveInBackground();
-
-        ParseObject gameScore = new ParseObject("GameScore");
-        gameScore.put("score", 1337);
-        gameScore.put("playerName", "Sean Plott");
-        gameScore.put("cheatMode", false);
-        gameScore.saveInBackground();
-
-
-        String myUser = user.getString("username");
 
     }
 
