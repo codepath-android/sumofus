@@ -15,7 +15,23 @@ import com.parse.ParseObject;
 public class User extends ParseObject {
 
     public String getName() {
-        return "";
+        return getString("name");
+    }
+
+    public String getScreenName() {
+        return getString("screenname");
+    }
+
+    public String getEmail() {
+        return getString("email");
+    }
+
+    public ParseFile getProfileImg() {
+        return getParseFile("profileImg");
+    }
+
+    public boolean isAdmin() {
+        return getBoolean("isAdmin");
     }
 
 }
