@@ -3,6 +3,7 @@ package com.example.dbykovskyy.sumofus.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,22 +16,25 @@ import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
 import com.example.dbykovskyy.sumofus.models.CampaignParse;
 import com.example.dbykovskyy.sumofus.models.Supporter;
 import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CampaignsActivity extends YouTubeBaseActivity {
     String imageUrl = "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
     String shortDescriptoin = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
     String longDescriptoin = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
 
-    private ArrayList<Campaign> campaigns;
-    private ArrayList<CampaignParse> campaignParse;
+    private static ArrayList<Campaign> campaigns = new ArrayList<Campaign>();;
     private CampaignItemAdapter adapterCampaigns;
     private ListView lvCampaigns;
 
@@ -44,11 +48,9 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         //if we don't have this statement it will crash the APP
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
-
+           // populateCampaignsParse();
         }
-
         populateCampaigns();
-
         adapterCampaigns = new CampaignItemAdapter(this, campaigns);
         lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
         lvCampaigns.setAdapter(adapterCampaigns);
@@ -86,14 +88,28 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         return campaigns;
     }
 
-    public ArrayList<CampaignParse> populateCampaignsParse() {
-        campaignParse = new ArrayList<CampaignParse>();
-        for (int i = 0; i <= 1; i++) {
-            CampaignParse camp = new CampaignParse();
-            campaignParse.add(camp);
-        }
-        return campaignParse;
+
+    public void populateCampaignsParse() {
+
+       campaigns = new ArrayList<Campaign>();
+
+        ParseQuery<CampaignParse> query = ParseQuery.getQuery(CampaignParse.class);
+        query.findInBackground(new FindCallback<CampaignParse>() {
+            @Override
+            public void done(List<CampaignParse> list, ParseException e) {
+                for (CampaignParse c : list) {
+                    Campaign camp = new Campaign(c.getCampaignUrl(), c.getOverview(), c.getDescription());
+                    campaigns.add(camp);
+                    Log.d("DEBUG:", c.getDescription());
+                }
+                adapterCampaigns = new CampaignItemAdapter(getApplicationContext(), campaigns);
+                lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
+                lvCampaigns.setAdapter(adapterCampaigns);
+            }
+        });
     }
+
+
 
 
 
@@ -120,8 +136,6 @@ public class CampaignsActivity extends YouTubeBaseActivity {
 
     public void createCampaign(View view) {
        // populateCampaignsParse();
-
-        Toast.makeText(getApplicationContext(), "Create", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, NewCampaignActivity.class);
         startActivityForResult(i, 0);
 
