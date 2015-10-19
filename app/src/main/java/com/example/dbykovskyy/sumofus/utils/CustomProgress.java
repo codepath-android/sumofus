@@ -91,13 +91,27 @@ public class CustomProgress extends TextView {
         super.onDraw(canvas);
         progressDrawable.setBounds(0, 0, width, this.getHeight());
         progressDrawable.draw(canvas);
+        //let's cast our max percentage into int to compare with getCurrentPercentage
+        final int maxPer = Math.round(maximumPercentage*100);
         if(isShowingPercentage()) {
-            this.setText(getCurrentPercentage()+"%");
+         /*   we need to stop updating text on progress bar when maxPercentage is less or equal
+            to the value that user is set */
+            if(getCurrentPercentage()<=maxPer){
+                this.setText(getCurrentPercentage() + "%");
+            }else {
+            //this is to cover the case where maxPercentage is set to 5%. Without this "if" statement below it will be set just to 3%
+                this.setText(maxPer+"%");
+            }
+
+
         }
         if(width<maxWidth) {
             width+=5;
             invalidate();
+        }else if(width==maxWidth){
+                return;
         }
+
     }
 
     /**

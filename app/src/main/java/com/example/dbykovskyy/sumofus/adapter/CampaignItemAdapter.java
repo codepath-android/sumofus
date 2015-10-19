@@ -15,18 +15,48 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dbykovskyy.sumofus.activity.CampaignDetailActivity;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
+import com.example.dbykovskyy.sumofus.utils.Config;
 import com.example.dbykovskyy.sumofus.utils.DeviceDimensionsHelper;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 import com.squareup.picasso.Picasso;
 
 import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 
-public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
+public class CampaignItemAdapter extends ArrayAdapter<Campaign> implements
+
+
+        YouTubePlayer.OnInitializedListener {
+
+    private static final int RECOVERY_REQUEST = 1;
+
+    @Override
+    public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+        if (!b) {
+            youTubePlayer.cueVideo("fhWaJi1Hsfo"); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+        }
+
+    }
+
+    @Override
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+        if (youTubeInitializationResult.isUserRecoverableError()) {
+            //youTubeInitializationResult.getErrorDialog(, RECOVERY_REQUEST).show();
+        } else {
+            //String error = String.format(getString(R.string.player_error), youTubeInitializationResult.toString());
+            Toast.makeText(getContext(), "Some youtube error", Toast.LENGTH_LONG).show();
+        }
+
+    }
 
     static class ViewHolder  {
 
@@ -34,6 +64,7 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
         ImageView ivCampaign;
         Button bvTakeAction;
         ProgressBar pb;
+        YouTubePlayerView you;
 
     }
 
@@ -54,9 +85,9 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
             convertView = inflater.inflate(R.layout.campaign_item, parent, false);
 
             viewHolder.pb = (ProgressBar) convertView.findViewById(R.id.pbLoading);
-
             viewHolder.tvShortCampaignDescription = (TextView)convertView.findViewById(R.id.tvShortDescription);
             viewHolder.ivCampaign = (ImageView)convertView.findViewById(R.id.ivCampaign);
+
 
             convertView.setTag(viewHolder);
         }else {
@@ -104,10 +135,9 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
             }
         });
 
-
-
         return convertView;
     }
+
 
     //this is to strech photo to a screen size and calculate a new ratio
     public double [] calculateNewDimentions(double picWidth, double picHeight){
