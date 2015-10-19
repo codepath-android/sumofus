@@ -34,7 +34,6 @@ public class CampaignsActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_campaigns);
         setupParse();
-      //  createParseObject();
         populateCampaigns();
 
         adapterCampaigns = new CampaignItemAdapter(this, campaigns);
@@ -90,18 +89,6 @@ public class CampaignsActivity extends AppCompatActivity {
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
        // ParseAnalytics.trackAppOpenedInBackground(getIntent());
-    }
-
-    public void createParseObject() {
-
-        ParseObject user = new ParseObject("Supporter");
-        user.put("name", "Alberto Campos");
-        user.put("screenname", "xopmac");
-        user.put("email", "xopmac@gmail.com");
-        user.put("isAdmin", true);
-        user.put("imageUrl", "https://pbs.twimg.com/profile_images/1666127454/Sum_Of_Us_400x400.jpg");
-        user.saveInBackground();
-
     }
 
 }

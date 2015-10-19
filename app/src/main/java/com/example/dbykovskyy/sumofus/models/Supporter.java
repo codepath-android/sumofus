@@ -11,7 +11,7 @@ import com.parse.ParseUser;
 * Sum of Us defines a Super-user, as the one who can add pictures to campaigns.
 * We'll allow an end user to create a campaign and send upload for approval.
 *  -- This pending campaign can be supported if found by a direct link.
-*  -- The idea is allow a SOU administrator to know whether this campaig is already popular or not
+*  -- The idea is allow a SOU administrator to know whether this campaign is already popular or not
 *
 * */
 
