@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="25dp"
         android:background="@color/orange"
-        android:text="TAKE ACTION"
+        android:text="@string/take_action"
         android:textColor="@color/white"
         android:id="@+id/btTakeActionDetail"
         android:shadowRadius="5"
@@ -51,6 +51,21 @@
         android:layout_above="@+id/tvShortDescription"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:background="@color/orange"
+        android:text="@string/create_campaign"
+        android:onClick="createCampaign"
+        android:textColor="@color/white"
+        android:id="@+id/btnCreate"
+        android:shadowRadius="5"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:layout_alignTop="@+id/btTakeActionDetail"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

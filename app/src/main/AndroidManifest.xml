@@ -10,8 +10,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +20,7 @@
             android:value="@string/parse_app_id" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
-            android:value="@string/parse_client_key"/>
+            android:value="@string/parse_client_key" />
 
         <activity
             android:name=".activity.CampaignsActivity"
@@ -44,6 +42,8 @@
         <activity
             android:name=".activity.SignPetitionActivity"
             android:label="@string/title_activity_sign_petition" >
+        </activity>
+        <activity android:name=".activity.NewCampaignActivity" >
         </activity>
     </application>
 
