@@ -12,6 +12,10 @@ import java.util.List;
 @ParseClassName("CampaignParse")
 public class CampaignParse extends ParseObject {
 
+    public CampaignParse () {
+        // Default constructor
+    }
+
     private final String defaultUrl = "http://sumofus.org";
 
     public String getTitle() {
