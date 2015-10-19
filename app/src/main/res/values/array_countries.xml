@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="Country">
+    <string-array name="country">
         <item>not selected</item>
         <item>United States</item>
         <item>Afghanistan</item>
