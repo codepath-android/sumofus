@@ -40,8 +40,8 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_campaigns);
-        setupParse();
 
+        //if we don't have this statement it will crash the APP
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
 
