@@ -9,11 +9,13 @@ import android.widget.ListView;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
+import com.example.dbykovskyy.sumofus.models.Supporter;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -35,22 +37,9 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_campaigns);
 
         if(!ParseCrashReporting.isCrashReportingEnabled()){
-            // Initializing Crash Reporting.
-            ParseCrashReporting.enable(this);
-            // Local Datastore.
-            Parse.enableLocalDatastore(this);
-            // Initialization code
-            Parse.initialize(this);
+            setupParse();
+            //createParseObject();
         }
-
-
-        ParseUser.enableAutomaticUser();
-        ParseACL defaultACL = new ParseACL();
-        //  Public read access.
-        // defaultACL.setPublicReadAccess(true);
-        ParseACL.setDefaultACL(defaultACL, true);
-
-        ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
 
         populateCampaigns();
@@ -90,6 +79,37 @@ public class CampaignsActivity extends YouTubeBaseActivity {
             campaigns.add(camp);
         }
      return campaigns;
+    }
+
+
+    public void setupParse() {
+        // Initializing Crash Reporting.
+        ParseCrashReporting.enable(this);
+
+        // Local Datastore.
+        Parse.enableLocalDatastore(this);
+
+        // Initialization code
+        ParseObject.registerSubclass(Supporter.class);
+        Parse.initialize(this);
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultACL = new ParseACL();
+        //  Public read access.
+        // defaultACL.setPublicReadAccess(true);
+        ParseACL.setDefaultACL(defaultACL, true);
+        // ParseAnalytics.trackAppOpenedInBackground(getIntent());
+    }
+
+    public void createParseObject() {
+
+        ParseObject user = new ParseObject("Supporter");
+        user.put("name", "Alberto Campos");
+        user.put("screenname", "xopmac");
+        user.put("email", "xopmac@gmail.com");
+        user.put("isAdmin", true);
+        user.put("imageUrl", "https://pbs.twimg.com/profile_images/1666127454/Sum_Of_Us_400x400.jpg");
+        user.saveInBackground();
+
     }
 
 }
