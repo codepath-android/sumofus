@@ -73,6 +73,7 @@ app/app.iml
 
 SumOfUs.iml
 <<<<<<< HEAD
+<<<<<<< HEAD
 SumOfUs.iml
 SumOfUs.iml
 app/app.iml
@@ -85,5 +86,7 @@ SumOfUs.iml
 .idea/vcs.xml
 
 app/app.iml
+=======
+>>>>>>> codepath-android/master
 =======
 >>>>>>> codepath-android/master

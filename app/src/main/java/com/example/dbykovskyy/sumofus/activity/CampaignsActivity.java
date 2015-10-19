@@ -37,10 +37,9 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         setContentView(R.layout.activity_campaigns);
         setupParse();
 
-
-        if(!ParseCrashReporting.isCrashReportingEnabled()){
+        if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
-            //createParseObject();
+
         }
 
         populateCampaigns();
@@ -73,13 +72,13 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public ArrayList<Campaign> populateCampaigns(){
+    public ArrayList<Campaign> populateCampaigns() {
         campaigns = new ArrayList<Campaign>();
-        for(int i=0; i<=10; i++){
+        for (int i = 0; i <= 10; i++) {
             Campaign camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin);
             campaigns.add(camp);
         }
-     return campaigns;
+        return campaigns;
     }
 
 
@@ -99,6 +98,7 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
         // ParseAnalytics.trackAppOpenedInBackground(getIntent());
-    }
 
+
+    }
 }
