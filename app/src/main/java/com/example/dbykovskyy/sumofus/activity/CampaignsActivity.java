@@ -10,15 +10,17 @@ import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
 import com.example.dbykovskyy.sumofus.models.Supporter;
+import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.parse.Parse;
 import com.parse.ParseACL;
+import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
-public class CampaignsActivity extends AppCompatActivity {
+public class CampaignsActivity extends YouTubeBaseActivity {
     String imageUrl = "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
     String shortDescriptoin = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
     String longDescriptoin = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
@@ -33,8 +35,13 @@ public class CampaignsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_campaigns);
-        setupParse();
-      //  createParseObject();
+
+        if(!ParseCrashReporting.isCrashReportingEnabled()){
+            setupParse();
+            //createParseObject();
+        }
+
+
         populateCampaigns();
 
         adapterCampaigns = new CampaignItemAdapter(this, campaigns);
@@ -74,6 +81,7 @@ public class CampaignsActivity extends AppCompatActivity {
      return campaigns;
     }
 
+
     public void setupParse() {
         // Initializing Crash Reporting.
         ParseCrashReporting.enable(this);
@@ -89,7 +97,7 @@ public class CampaignsActivity extends AppCompatActivity {
         //  Public read access.
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
-       // ParseAnalytics.trackAppOpenedInBackground(getIntent());
+        // ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
     public void createParseObject() {

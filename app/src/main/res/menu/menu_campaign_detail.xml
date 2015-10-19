@@ -2,6 +2,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.dbykovskyy.sumofus.activity.CampaignDetailActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_add_photo"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:title="Add Photo">
+
+    <menu>
+            <item
+                android:id="@+id/action_take_photo"
+                android:title="Take Photo"/>
+            <item
+                android:id="@+id/action_use_existing"
+                android:title="Use Existing"/>
+
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@android:drawable/ic_menu_share"
+        android:title="Some title"
+        app:showAsAction="always"
+        >
+
+    </item>
+
+
+
+
 </menu>
+
+
