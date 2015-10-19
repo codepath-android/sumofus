@@ -17,4 +17,23 @@
     <string name="take_action">Take Action</string>
     <string name="create_campaign">Create Campaign</string>
 
+
+    <string name="campaign_label">Campaign title</string>
+    <string name="campaign_description">Description</string>
+    <string name="campaign_title">Title</string>
+    <string name="campaign_overview">Overview</string>
+    <string name="campaign_sign_message">Suggested support message</string>
+    <string name="campaign_goal">Supporters goal</string>
+    <string name="campaign_url">Your campaign website</string>
+
+    <string-array name="category_array">
+        <item>Support individual</item>
+        <item>Corruption awareness</item>
+        <item>Share good news</item>
+        <item>Promote common good</item>
+    </string-array>
+
+    <string name="save_button_text">Save</string>
+    <string name="cancel_button_text">Cancel</string>
+
 </resources>

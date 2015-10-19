@@ -1,5 +1,6 @@
 package com.example.dbykovskyy.sumofus.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -121,6 +122,8 @@ public class CampaignsActivity extends YouTubeBaseActivity {
        // populateCampaignsParse();
 
         Toast.makeText(getApplicationContext(), "Create", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, NewCampaignActivity.class);
+        startActivityForResult(i, 0);
 
     }
 }

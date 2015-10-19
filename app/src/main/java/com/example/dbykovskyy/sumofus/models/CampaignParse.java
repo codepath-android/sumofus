@@ -56,6 +56,16 @@ public class CampaignParse extends ParseObject {
     }
 
 
+    public void setCategory(String category) {
+        put("category", category);
+    }
+
+    public String getCategory() {
+        String text = getString("category");
+        return str(text);
+    }
+
+
     public int getGoal() {
         int goal = getInt("goal");
         return goal;
