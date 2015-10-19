@@ -9,12 +9,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/campaign_title"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/campaign_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="25dp"
         android:inputType="textMultiLine" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/campaign_overview"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/campaign_overview"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/campaign_description"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/campaign_description"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/campaign_sign_message"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/campaign_sign_message"
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/campaign_goal"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/campaign_goal"
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:text="@string/campaign_url"
-        android:textSize="14sp" />
+        android:textSize="10sp" />
 
     <EditText
         android:id="@+id/campaign_url"
@@ -89,11 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <ImageButton
-        android:id="@+id/photo_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher" />
+
 
     <Button
         android:id="@+id/save_button"
@@ -107,6 +103,10 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel_button_text" />
 
-
+    <ImageButton
+        android:id="@+id/photo_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher" />
 
 </LinearLayout>

@@ -32,7 +32,12 @@ public class NewCampaignFragment extends Fragment {
     private ImageButton photoButton;
     private Button saveButton;
     private Button cancelButton;
-    private TextView campaignName;
+    private TextView campaignTitle;
+    private TextView campaignDescription;
+    private TextView campaignOverview;
+    private TextView campaignMessage;
+    private TextView campaignGoal;
+    private TextView campaignUrl;
     private Spinner campaignCategory;
 
     @Override
@@ -45,11 +50,15 @@ public class NewCampaignFragment extends Fragment {
                              Bundle SavedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_campaign, parent, false);
 
-        campaignName = ((EditText) v.findViewById(R.id.campaign_name));
+        campaignTitle = ((EditText) v.findViewById(R.id.campaign_title));
+        campaignOverview = ((EditText) v.findViewById(R.id.campaign_overview));
+        campaignDescription = ((EditText) v.findViewById(R.id.campaign_description));
+        campaignGoal = ((EditText) v.findViewById(R.id.campaign_goal));
+        campaignMessage = ((EditText) v.findViewById(R.id.campaign_sign_message));
+        campaignUrl = ((EditText) v.findViewById(R.id.campaign_url));
 
-        // The campaignRating spinner lets people assign favorites of meals they've
-        // eaten.
-        // Meals with 4 or 5 ratings will appear in the Favorites view.
+        // The campaignCategory spinner lets people assign a general category for their campaign
+
         campaignCategory = ((Spinner) v.findViewById(R.id.categories_spinner));
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
                 .createFromResource(getActivity(), R.array.category_array,
@@ -63,7 +72,7 @@ public class NewCampaignFragment extends Fragment {
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager) getActivity()
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(campaignName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(campaignTitle.getWindowToken(), 0);
 
             }
         });
@@ -77,13 +86,18 @@ public class NewCampaignFragment extends Fragment {
 
                 // When the user clicks "Save," upload the campaign to Parse
                 // Add data to the campaign object:
-                campaign.setTitle(campaignName.getText().toString());
+                campaign.setTitle(campaignTitle.getText().toString());
+                campaign.setOverview(campaignOverview.getText().toString());
+                campaign.setDescription(campaignDescription.getText().toString());
+                campaign.setSignMessage(campaignMessage.getText().toString());
+              //  campaign.setGoal(Integer.getInteger( campaignGoal.getText().toString() ));
+                campaign.setCampaignUrl(campaignUrl.getText().toString());
 
                 // Associate the campaign with the current user
               //  campaign.setAuthor(ParseUser.getCurrentUser());
 
                 // Add the rating
-                campaign.setSignMessage(campaignCategory.getSelectedItem().toString());
+                campaign.setCategory(campaignCategory.getSelectedItem().toString());
 
                 // If the user added a photo, that data will be
                 // added in the CameraFragment
