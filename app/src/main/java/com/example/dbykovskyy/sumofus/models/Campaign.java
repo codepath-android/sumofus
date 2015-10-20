@@ -15,7 +15,8 @@ public class Campaign implements Serializable{
     public Campaign(String iUrl, String sDescription, String lDescription){
         imageUrl=iUrl;
         shortDescription=sDescription;
-        longDescription=campText;
+        longDescription=lDescription;
+       // longDescription=campText;
 
     }
 
@@ -45,7 +46,7 @@ public class Campaign implements Serializable{
     }
 
 
-    private String campText = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.\n" +
+    private String campText2 = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.\n" +
             "\n" +
             "The third largest palm oil producer in the world, Felda, needs a loan from Standard Chartered to purchase Eagle High Plantations in Indonesia.\n" +
             "\n" +
