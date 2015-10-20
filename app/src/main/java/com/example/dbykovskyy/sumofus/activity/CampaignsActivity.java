@@ -54,7 +54,7 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         adapterCampaigns = new CampaignItemAdapter(this, campaigns);
         lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
         lvCampaigns.setAdapter(adapterCampaigns);
-        //populateCampaignsParse();
+
     }
 
     @Override
@@ -124,7 +124,6 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
         // ParseAnalytics.trackAppOpenedInBackground(getIntent());
-
 
     }
 
