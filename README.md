@@ -39,7 +39,7 @@ The following **optional** features could be implemented in a future release:
 
 Not available yet.
 
-<img src='http://i.imgur.com/0JHKptG.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='SumofUsVideo.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
