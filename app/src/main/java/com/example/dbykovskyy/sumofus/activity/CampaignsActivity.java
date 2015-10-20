@@ -34,7 +34,7 @@ public class CampaignsActivity extends YouTubeBaseActivity {
     String shortDescriptoin; // = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
     String longDescriptoin; // = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
 
-    private static ArrayList<Campaign> campaigns = new ArrayList<Campaign>();
+    private ArrayList<Campaign> campaigns;
     private CampaignItemAdapter adapterCampaigns;
     private ListView lvCampaigns;
 
@@ -42,19 +42,19 @@ public class CampaignsActivity extends YouTubeBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_campaigns);
+        //bind together Collection, Adapter and ListView
+        campaigns = new ArrayList<Campaign>();
+        adapterCampaigns = new CampaignItemAdapter(this, campaigns);
+        lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
+        lvCampaigns.setAdapter(adapterCampaigns);
 
-        //if we don't have this statement it will crash the APP
+        //fetching Campaigns from Parse to our empty Collection
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
             populateCampaignsParse();
         }
-        //populateCampaigns();
-        adapterCampaigns = new CampaignItemAdapter(this, campaigns);
-        lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
-        lvCampaigns.setAdapter(adapterCampaigns);
-        //populateCampaignsParse();
+
     }
 
     @Override
@@ -79,18 +79,18 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public ArrayList<Campaign> populateCampaigns() {
+    //This is a helper method when backend is not working
+/*    public ArrayList<Campaign> populateCampaigns() {
         //campaigns = new ArrayList<Campaign>();
         for (int i = 0; i <= 10; i++) {
             Campaign camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin);
             campaigns.add(camp);
         }
         return campaigns;
-    }
+    }*/
 
 
     public void populateCampaignsParse() {
-//       campaigns = new ArrayList<Campaign>();
 
         ParseQuery<CampaignParse> query = ParseQuery.getQuery(CampaignParse.class);
         query.findInBackground(new FindCallback<CampaignParse>() {
@@ -101,8 +101,7 @@ public class CampaignsActivity extends YouTubeBaseActivity {
                     campaigns.add(camp);
                     Log.d("DEBUG:", c.getDescription());
                 }
-                adapterCampaigns.addAll(campaigns);
-                adapterCampaigns.notifyDataSetChanged();
+                adapterCampaigns.addAll();
             }
         });
     }
@@ -124,8 +123,6 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         // defaultACL.setPublicReadAccess(true);
         ParseACL.setDefaultACL(defaultACL, true);
         // ParseAnalytics.trackAppOpenedInBackground(getIntent());
-
-
     }
 
     public void createCampaign(View view) {
