@@ -92,6 +92,7 @@ public class NewCampaignFragment extends Fragment {
                 campaign.setSignMessage(campaignMessage.getText().toString());
               //  campaign.setGoal(Integer.getInteger( campaignGoal.getText().toString() ));
                 campaign.setCampaignUrl(campaignUrl.getText().toString());
+              //  campaign.setOneImageUrl("imageUrl", campaignUrl.getText()); // TODO: Need to convert String to Parse Array element
 
                 // Associate the campaign with the current user
               //  campaign.setAuthor(ParseUser.getCurrentUser());
