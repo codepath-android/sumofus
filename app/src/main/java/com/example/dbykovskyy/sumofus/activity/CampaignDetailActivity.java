@@ -1,22 +1,23 @@
 package com.example.dbykovskyy.sumofus.activity;
 
 import android.app.Activity;
+
 import android.content.Intent;
-import android.database.Cursor;
+
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.view.MenuItemCompat;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ShareActionProvider;
-import android.text.Html;
+
 import android.text.method.ScrollingMovementMethod;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,8 +28,8 @@ import android.widget.Toast;
 
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.models.Campaign;
+import com.example.dbykovskyy.sumofus.utils.BitmapScaler;
 import com.example.dbykovskyy.sumofus.utils.CustomProgress;
-import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -48,15 +49,12 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     private Uri photoUri;
     private Bitmap photoBitmap;
-    public String photoFileName = "photo.jpg";
 
     TextView tvCampaignText;
     ImageView ivCampaignImage;
     CustomProgress customProgress;
     Button btSignPetition;
     TextView tvOurGoalIs;
-
-
 
 
     @Override
@@ -152,24 +150,35 @@ public class CampaignDetailActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == TAKE_PHOTO_CODE) {
-                // Extract the photo that was just taken by the camera
+                 //cropPhoto(photoUri);
 
-                // Call the method below to trigger the cropping
-                 cropPhoto(photoUri);
+                photoBitmap = BitmapFactory.decodeFile(photoUri.getPath());
+                Bitmap resizedImage =  BitmapScaler.scaleToFitWidth(photoBitmap, 300);
+                ivCampaignImage.getAdjustViewBounds();
+                ivCampaignImage.setScaleType(ImageView.ScaleType.FIT_XY);
+                ivCampaignImage.setImageBitmap(resizedImage);
+
             } else if (requestCode == PICK_PHOTO_CODE) {
-                // Extract the photo that was just picked from the gallery
 
-                // Call the method below to trigger the cropping
-                 cropPhoto(photoUri);
+                photoUri = data.getData();
+                try {
+                    photoBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), photoUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                Bitmap resizedImage =  BitmapScaler.scaleToFitWidth(photoBitmap, 300);
+                ivCampaignImage.getAdjustViewBounds();
+                ivCampaignImage.setScaleType(ImageView.ScaleType.FIT_XY);
+                ivCampaignImage.setImageBitmap(resizedImage);
+
+                //cropPhoto(photoUri);
             } else if (requestCode == CROP_PHOTO_CODE) {
                 photoBitmap = data.getParcelableExtra("data");
-                //startPreviewPhotoActivity();
 
                 ivCampaignImage.getAdjustViewBounds();
                 ivCampaignImage.setScaleType(ImageView.ScaleType.FIT_XY);
                 ivCampaignImage.setImageBitmap(photoBitmap);
-
-
 
                 Toast.makeText(this, "I just took a picture", Toast.LENGTH_LONG).show();
 
@@ -218,89 +227,52 @@ public class CampaignDetailActivity extends AppCompatActivity {
     // Gets the image URI and setup the associated share intent to hook into the provider
 
     public void setupShareIntent() {
-
         // Fetch Bitmap Uri locally
-
         ImageView ivImage = (ImageView)findViewById(R.id.ivCampaignDetail);
-
         // Get access to the URI for the bitmap
-
         Uri bmpUri = getLocalBitmapUri(ivImage);
-
         if (bmpUri != null) {
-
             // Construct a ShareIntent with link to image
-
             Intent shareIntent = new Intent();
-
             shareIntent.setAction(Intent.ACTION_SEND);
-
             shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Title Of Test Post");
             shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.sumofus.com");
             shareIntent.setType("image/*");
-
             // Launch sharing dialog for image
-
             startActivity(Intent.createChooser(shareIntent, "send"));
-
         } else {
-
-            // ...sharing failed, handle error
+            Toast.makeText(this, "Some error occured during sharing", Toast.LENGTH_LONG).show();
 
         }
 
     }
 
-
-
-
     // Returns the URI path to the Bitmap displayed in specified ImageView
 
     public Uri getLocalBitmapUri(ImageView imageView) {
-
         // Extract Bitmap from ImageView drawable
-
         Drawable drawable = imageView.getDrawable();
-
         Bitmap bmp = null;
-
         if (drawable instanceof BitmapDrawable){
-
             bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-
         } else {
-
             return null;
-
         }
 
         // Store image to default external storage directory
-
         Uri bmpUri = null;
-
         try {
-
             File file =  new File(Environment.getExternalStoragePublicDirectory(
-
                     Environment.DIRECTORY_DOWNLOADS), "share_image_" + System.currentTimeMillis() + ".png");
-
             file.getParentFile().mkdirs();
-
             FileOutputStream out = new FileOutputStream(file);
-
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
-
             out.close();
-
             bmpUri = Uri.fromFile(file);
-
         } catch (IOException e) {
-
             e.printStackTrace();
-
         }
-
         return bmpUri;
 
     }
