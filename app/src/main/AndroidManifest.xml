@@ -36,14 +36,14 @@
             android:label="@string/title_activity_campaign_detail" >
         </activity>
         <activity
-            android:name=".activity.AddNewCampaignActivity"
-            android:label="@string/title_activity_add_new_campaign" >
-        </activity>
-        <activity
             android:name=".activity.SignPetitionActivity"
             android:label="@string/title_activity_sign_petition" >
         </activity>
         <activity android:name=".activity.NewCampaignActivity" >
+        </activity>
+        <activity
+            android:name=".activity.UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
         </activity>
     </application>
 

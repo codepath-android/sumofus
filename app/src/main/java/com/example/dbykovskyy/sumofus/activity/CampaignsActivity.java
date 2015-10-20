@@ -1,25 +1,23 @@
 package com.example.dbykovskyy.sumofus.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
 import com.example.dbykovskyy.sumofus.models.CampaignParse;
-import com.example.dbykovskyy.sumofus.models.Supporter;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
-import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -29,7 +27,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CampaignsActivity extends YouTubeBaseActivity {
+public class CampaignsActivity extends AppCompatActivity {
     String imageUrl; // = "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
     String shortDescriptoin; // = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
     String longDescriptoin; // = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
@@ -48,6 +46,8 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         adapterCampaigns = new CampaignItemAdapter(this, campaigns);
         lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
         lvCampaigns.setAdapter(adapterCampaigns);
+
+
 
         //fetching Campaigns from Parse to our empty Collection
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
@@ -74,6 +74,13 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        }
+
+        if(id==R.id.user_profile){
+
+            Intent i = new Intent(this, UserProfileActivity.class);
+            startActivity(i);
+
         }
 
         return super.onOptionsItemSelected(item);

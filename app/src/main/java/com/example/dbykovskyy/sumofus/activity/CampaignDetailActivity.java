@@ -30,6 +30,7 @@ import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.utils.BitmapScaler;
 import com.example.dbykovskyy.sumofus.utils.CustomProgress;
+import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -39,7 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CampaignDetailActivity extends AppCompatActivity {
+public class CampaignDetailActivity extends YouTubeBaseActivity {
     private ShareActionProvider miShareAction;
 
     private static final int TAKE_PHOTO_CODE = 1;
