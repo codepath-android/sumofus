@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dbykovskyy.sumofus" >
 
+
+    <!-- Permission to vibrate - recommended, allows vibration feedback on scan -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,6 +14,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Camera features - recommended -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.flash" android:required="false" />
+
 
     <application
         android:allowBackup="true"
@@ -36,15 +47,23 @@
             android:label="@string/title_activity_campaign_detail" >
         </activity>
         <activity
-            android:name=".activity.AddNewCampaignActivity"
-            android:label="@string/title_activity_add_new_campaign" >
-        </activity>
-        <activity
             android:name=".activity.SignPetitionActivity"
             android:label="@string/title_activity_sign_petition" >
         </activity>
         <activity android:name=".activity.NewCampaignActivity" >
         </activity>
+        <activity
+            android:name=".activity.UserProfileActivity"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+
+        <!-- Activities responsible for gathering payment info -->
+        <activity android:name="io.card.payment.CardIOActivity" android:configChanges="keyboardHidden|orientation" />
+        <activity android:name="io.card.payment.DataEntryActivity" />
+
+
+
+
     </application>
 
 </manifest>
