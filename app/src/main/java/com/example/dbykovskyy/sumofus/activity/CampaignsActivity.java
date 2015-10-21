@@ -33,10 +33,10 @@ import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 public class CampaignsActivity extends AppCompatActivity {
-    String imageUrl = "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
-    String oneMOreImage = "http://www.drayan.com/images/painting/small_sunrise.jpg";
-    String shortDescriptoin = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
-    String longDescriptoin  = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
+    String imageUrl; //= "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
+    String oneMOreImage; //= "http://www.drayan.com/images/painting/small_sunrise.jpg";
+    String shortDescriptoin; //= "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
+    String longDescriptoin;  //= "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
 
     private static final int MY_SCAN_REQUEST_CODE = 765;
     private ArrayList<Campaign> campaigns;
@@ -54,14 +54,14 @@ public class CampaignsActivity extends AppCompatActivity {
         lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
         lvCampaigns.setAdapter(adapterCampaigns);
 
-        populateCampaigns();
+        //populateCampaigns();
 
-/*        //fetching Campaigns from Parse to our empty Collection
+        //fetching Campaigns from Parse to our empty Collection
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
             populateCampaignsParse();
             //populateCampaigns();
-        }*/
+        }
 
     }
 
