@@ -33,10 +33,12 @@ import io.card.payment.CardIOActivity;
 import io.card.payment.CreditCard;
 
 public class CampaignsActivity extends AppCompatActivity {
-    String imageUrl; // = "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
-    String shortDescriptoin; // = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
-    String longDescriptoin; // = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
+    String imageUrl = "http://sumofus.org/wp-content/uploads/2015/10/38b73ede-6a13-433c-9c76-a567ccfea8b1.jpg";
+    String oneMOreImage = "http://www.drayan.com/images/painting/small_sunrise.jpg";
+    String shortDescriptoin = "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
+    String longDescriptoin  = "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
 
+    private static final int MY_SCAN_REQUEST_CODE = 765;
     private ArrayList<Campaign> campaigns;
     private CampaignItemAdapter adapterCampaigns;
     private ListView lvCampaigns;
@@ -52,13 +54,14 @@ public class CampaignsActivity extends AppCompatActivity {
         lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
         lvCampaigns.setAdapter(adapterCampaigns);
 
+        populateCampaigns();
 
-
-        //fetching Campaigns from Parse to our empty Collection
+/*        //fetching Campaigns from Parse to our empty Collection
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
             populateCampaignsParse();
-        }
+            //populateCampaigns();
+        }*/
 
     }
 
@@ -95,14 +98,20 @@ public class CampaignsActivity extends AppCompatActivity {
     }
 
     //This is a helper method when backend is not working
-/*    public ArrayList<Campaign> populateCampaigns() {
+    public ArrayList<Campaign> populateCampaigns() {
         //campaigns = new ArrayList<Campaign>();
+        Campaign camp;
         for (int i = 0; i <= 10; i++) {
-            Campaign camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin);
+            if(i==4){
+                camp = new Campaign(oneMOreImage, shortDescriptoin, longDescriptoin);
+            }else {
+                camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin);
+            }
+
             campaigns.add(camp);
         }
         return campaigns;
-    }*/
+    }
 
 
     public void populateCampaignsParse() {
@@ -148,10 +157,11 @@ public class CampaignsActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityResult(resultCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == 777) {
+
+        if (resultCode == MY_SCAN_REQUEST_CODE) {
             String resultDisplayStr;
             if (data != null && data.hasExtra(CardIOActivity.EXTRA_SCAN_RESULT)) {
                 CreditCard scanResult = data.getParcelableExtra(CardIOActivity.EXTRA_SCAN_RESULT);
@@ -182,6 +192,9 @@ public class CampaignsActivity extends AppCompatActivity {
             // resultTextView.setText(resultStr);
         }
         // else handle other activity results
+
+
+
     }
 
     public void onScanPress() {
@@ -193,7 +206,7 @@ public class CampaignsActivity extends AppCompatActivity {
         scanIntent.putExtra(CardIOActivity.EXTRA_REQUIRE_POSTAL_CODE, false); // default: false
 
         // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
-        startActivityForResult(scanIntent, 777);
+        startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
     }
 
 }
