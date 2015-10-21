@@ -2,21 +2,16 @@ package com.example.dbykovskyy.sumofus.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.ShareActionProvider;
-import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +23,9 @@ import android.widget.Toast;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.utils.CustomProgress;
-import com.squareup.picasso.Callback;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -39,25 +36,35 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CampaignDetailActivity extends AppCompatActivity {
-    private ShareActionProvider miShareAction;
-
     private static final int TAKE_PHOTO_CODE = 1;
     private static final int PICK_PHOTO_CODE = 2;
     private static final int CROP_PHOTO_CODE = 3;
     private static final int POST_PHOTO_CODE = 4;
-
-    private Uri photoUri;
-    private Bitmap photoBitmap;
     public String photoFileName = "photo.jpg";
-
     TextView tvCampaignText;
     ImageView ivCampaignImage;
     CustomProgress customProgress;
     Button btSignPetition;
     TextView tvOurGoalIs;
+    private ShareActionProvider miShareAction;
+    private Uri photoUri;
+    private Bitmap photoBitmap;
 
+    //this is to create picture filename
+    private static File getOutputMediaFile() {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "sumofus");
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()) {
+            return null;
+        }
 
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_" + timeStamp + ".jpg");
 
+        return mediaFile;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +73,17 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_campaign_detail);
         //finding views
-        tvCampaignText = (TextView)findViewById(R.id.tvCampaignTextDetail);
-        ivCampaignImage = (ImageView)findViewById(R.id.ivCampaignDetail);
-        customProgress = (CustomProgress)findViewById(R.id.pbGoal);
-        btSignPetition = (Button)findViewById(R.id.btTakeActionDetail);
-        tvOurGoalIs = (TextView)findViewById(R.id.tvOurGoalIs);
+        tvCampaignText = (TextView) findViewById(R.id.tvCampaignTextDetail);
+        ivCampaignImage = (ImageView) findViewById(R.id.ivCampaignDetail);
+        customProgress = (CustomProgress) findViewById(R.id.pbGoal);
+        btSignPetition = (Button) findViewById(R.id.btTakeActionDetail);
+        tvOurGoalIs = (TextView) findViewById(R.id.tvOurGoalIs);
         //getting intent
         Campaign campaign = (Campaign) getIntent().getSerializableExtra("camp");
 
-       //setting ip the views
+        //setting ip the views
         ivCampaignImage.setImageResource(0);
         Picasso.with(this).load(campaign.getImageUrl()).into(ivCampaignImage);
-
 
 
         //make text of campaign srollable
@@ -109,8 +115,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -121,9 +125,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
-            case R.id.action_take_photo:
-            {
+        switch (item.getItemId()) {
+            case R.id.action_take_photo: {
                 // create Intent to take a picture and return control to the calling application
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 photoUri = Uri.fromFile(getOutputMediaFile()); // create a file to save the image
@@ -132,16 +135,14 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 startActivityForResult(intent, TAKE_PHOTO_CODE);
             }
             break;
-            case R.id.action_use_existing:
-            {
+            case R.id.action_use_existing: {
                 // Take the user to the gallery app
                 Intent photoGalleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(photoGalleryIntent , PICK_PHOTO_CODE);
+                startActivityForResult(photoGalleryIntent, PICK_PHOTO_CODE);
             }
             break;
-            case  R.id.action_share:
-            {
-                setupShareIntent();
+            case R.id.action_share: {
+                setupFacebookShareIntent();
             }
             break;
         }
@@ -155,12 +156,12 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 // Extract the photo that was just taken by the camera
 
                 // Call the method below to trigger the cropping
-                 cropPhoto(photoUri);
+                cropPhoto(photoUri);
             } else if (requestCode == PICK_PHOTO_CODE) {
                 // Extract the photo that was just picked from the gallery
 
                 // Call the method below to trigger the cropping
-                 cropPhoto(photoUri);
+                cropPhoto(photoUri);
             } else if (requestCode == CROP_PHOTO_CODE) {
                 photoBitmap = data.getParcelableExtra("data");
                 //startPreviewPhotoActivity();
@@ -168,7 +169,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
                 ivCampaignImage.getAdjustViewBounds();
                 ivCampaignImage.setScaleType(ImageView.ScaleType.FIT_XY);
                 ivCampaignImage.setImageBitmap(photoBitmap);
-
 
 
                 Toast.makeText(this, "I just took a picture", Toast.LENGTH_LONG).show();
@@ -198,22 +198,24 @@ public class CampaignDetailActivity extends AppCompatActivity {
     }
 
 
-    //this is to create picture filename
-    private static File getOutputMediaFile() {
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "sumofus");
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            return null;
-        }
+    //Share with Facebook
+    //We will need to add two share buttons one for FB and one to share with other apps.
+    //Facebook doesn't work well with normal sharing intents when sharing multiple content elements as discussed in this bug: https://developers.facebook.com/x/bugs/332619626816423/
 
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                "IMG_"+ timeStamp + ".jpg");
+    public void setupFacebookShareIntent() {
+        ShareDialog shareDialog;
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        shareDialog = new ShareDialog(this);
 
-        return mediaFile;
+        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                .setContentTitle("SumOfUs")
+                .setContentDescription(
+                        "\"Title Of Test Post\"")
+                .setContentUrl(Uri.parse("http://www.sumofus.org"))
+                .build();
+
+        shareDialog.show(linkContent);
     }
-
 
     // Gets the image URI and setup the associated share intent to hook into the provider
 
@@ -237,7 +239,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
             shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Title Of Test Post");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.sumofus.com");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.sumofus.org");
             shareIntent.setType("image/*");
 
             // Launch sharing dialog for image
@@ -253,8 +255,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
     }
 
 
-
-
     // Returns the URI path to the Bitmap displayed in specified ImageView
 
     public Uri getLocalBitmapUri(ImageView imageView) {
@@ -265,7 +265,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         Bitmap bmp = null;
 
-        if (drawable instanceof BitmapDrawable){
+        if (drawable instanceof BitmapDrawable) {
 
             bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
 
@@ -281,7 +281,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
         try {
 
-            File file =  new File(Environment.getExternalStoragePublicDirectory(
+            File file = new File(Environment.getExternalStoragePublicDirectory(
 
                     Environment.DIRECTORY_DOWNLOADS), "share_image_" + System.currentTimeMillis() + ".png");
 
@@ -304,7 +304,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
         return bmpUri;
 
     }
-
 
 
 }

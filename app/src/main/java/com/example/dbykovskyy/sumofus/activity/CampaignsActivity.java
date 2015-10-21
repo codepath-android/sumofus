@@ -1,7 +1,6 @@
 package com.example.dbykovskyy.sumofus.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,15 +8,13 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
+import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.models.CampaignParse;
-import com.example.dbykovskyy.sumofus.models.Supporter;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.parse.Parse;
 import com.parse.ParseACL;
-import com.parse.ParseAnalytics;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -108,6 +105,7 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         //ParseObject.registerSubclass(Supporter.class);
         ParseObject.registerSubclass(CampaignParse.class);
         Parse.initialize(this);
+
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
         //  Public read access.
@@ -115,11 +113,10 @@ public class CampaignsActivity extends YouTubeBaseActivity {
         ParseACL.setDefaultACL(defaultACL, true);
         // ParseAnalytics.trackAppOpenedInBackground(getIntent());
 
-
     }
 
     public void createCampaign(View view) {
-       // populateCampaignsParse();
+        // populateCampaignsParse();
 
         Toast.makeText(getApplicationContext(), "Create", Toast.LENGTH_SHORT).show();
         Intent i = new Intent(this, NewCampaignActivity.class);

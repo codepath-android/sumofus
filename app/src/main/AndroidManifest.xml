@@ -11,25 +11,34 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".application.User_Parse"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+
+        >
         <meta-data
             android:name="com.parse.APPLICATION_ID"
             android:value="@string/parse_app_id" />
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="@string/parse_client_key" />
-
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <activity
-            android:name=".activity.CampaignsActivity"
+            android:name=".activity.DispatchActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.CampaignsActivity"
+            android:label="@string/app_name" >
         </activity>
         <activity
             android:name=".activity.CampaignDetailActivity"
@@ -45,6 +54,11 @@
         </activity>
         <activity android:name=".activity.NewCampaignActivity" >
         </activity>
+        <activity android:name=".activity.Welcome_LoginActivity_or_Signup" >
+        </activity>
+        <activity android:name=".activity.SignUpActivity" >
+        </activity>
+        <activity android:name="com.facebook.FacebookActivity"></activity>
     </application>
 
 </manifest>

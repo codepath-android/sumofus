@@ -11,8 +11,11 @@
     <string name="title_activity_campaign_detail">CampaignDetailActivity</string>
     <string name="title_activity_add_new_campaign">AddNewCampaignActivity</string>
     <string name="title_activity_sign_petition">SignPetitionActivity</string>
+
     <string name="parse_app_id">LCPA3eHqb1CyiP2pmZGdDXw6I54pZKNCoxTGAsTt</string>
     <string name="parse_client_key">hweFBlma45UrDKmcRNSlcdG7Fidp6lST0Siu8tcx</string>
+    <string name="facebook_app_id">1692972167639713</string>
+
 
     <string name="take_action">Take Action</string>
     <string name="create_campaign">Create Campaign</string>
@@ -35,5 +38,6 @@
 
     <string name="save_button_text">Save</string>
     <string name="cancel_button_text">Cancel</string>
+    <string name="signup">Sign up</string>
 
 </resources>

@@ -2,14 +2,15 @@ package com.example.dbykovskyy.sumofus.activity;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.fragments.NewCampaignFragment;
 import com.example.dbykovskyy.sumofus.models.CampaignParse;
+import com.parse.ParseObject;
 
 public class NewCampaignActivity extends AppCompatActivity {
 
@@ -17,6 +18,8 @@ public class NewCampaignActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ParseObject.registerSubclass(CampaignParse.class);
+
         campaign = new CampaignParse();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
