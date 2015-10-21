@@ -93,7 +93,7 @@ public class NewCampaignFragment extends Fragment {
                 campaign.setSignMessage(campaignMessage.getText().toString());
                 campaign.setGoal(Integer.parseInt(campaignGoal.getText().toString()));
                 campaign.setCampaignUrl(campaignUrl.getText().toString());
-                campaign.setOneImageUrl(campaignImage.getText().toString());
+                campaign.setImageUrl(campaignImage.getText().toString());
                 campaign.setCategory(campaignCategory.getSelectedItem().toString());
 
                 // Associate the campaign with the current user
