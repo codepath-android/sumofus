@@ -7,6 +7,10 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import org.json.JSONArray;
+import org.json.JSONStringer;
+
+import java.lang.reflect.Array;
 import java.util.List;
 
 @ParseClassName("CampaignParse")
@@ -95,6 +99,17 @@ public class CampaignParse extends ParseObject {
     public void setCampaignUrl(String url) {
         put("url", url);
     }
+
+    public JSONArray getAllImageUrls() {
+        JSONArray text = getJSONArray("imageUrl");
+        return text;
+    }
+
+    public void setOneImageUrl(String key, JSONStringer imageUrl) {
+        addUnique(key, imageUrl);
+        put(key, imageUrl);
+    }
+
 
 
     public List<Campaign> getMedia() {
