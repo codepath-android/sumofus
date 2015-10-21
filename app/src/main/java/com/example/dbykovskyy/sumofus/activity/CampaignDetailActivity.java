@@ -40,8 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CampaignDetailActivity extends YouTubeBaseActivity {
-    private ShareActionProvider miShareAction;
+public class CampaignDetailActivity extends AppCompatActivity {
 
     private static final int TAKE_PHOTO_CODE = 1;
     private static final int PICK_PHOTO_CODE = 2;

@@ -3,8 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".CampaignsActivity">
 
     <item
-        android:id="@+id/user_profile"
-        android:icon="@android:drawable/ic_menu_info_details"
-        android:title="profile"
-        app:showAsAction="always" />
+        android:id="@+id/account"
+        android:icon="@android:drawable/ic_dialog_alert"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:title="Menus">
+
+        <menu>
+            <item
+                android:id="@+id/action_donate"
+                android:title="Donate"/>
+            <item
+                android:id="@+id/action_account"
+                android:title="Account"/>
+
+        </menu>
+    </item>
+
+
+
+
+
 </menu>

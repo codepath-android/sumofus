@@ -30,6 +30,7 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+    compile 'io.card:android-sdk:5.1.1'
     compile 'com.parse.bolts:bolts-android:1.2.1'
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile fileTree(dir: 'libs', include: 'ParseCrashReporting-*.jar')
