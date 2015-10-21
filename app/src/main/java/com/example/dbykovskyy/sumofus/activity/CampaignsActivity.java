@@ -62,11 +62,6 @@ public class CampaignsActivity extends AppCompatActivity {
             populateCampaignsParse();
             //populateCampaigns();
         }
-        //populateCampaigns();
-        adapterCampaigns = new CampaignItemAdapter(this, campaigns);
-        lvCampaigns = (ListView) findViewById(R.id.lvCampaigns);
-        lvCampaigns.setAdapter(adapterCampaigns);
-
 
     }
 
