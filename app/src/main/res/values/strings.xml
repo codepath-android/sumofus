@@ -23,8 +23,9 @@
     <string name="campaign_title">Title</string>
     <string name="campaign_overview">Overview</string>
     <string name="campaign_sign_message">Suggested support message</string>
-    <string name="campaign_goal">Supporters goal</string>
+    <string name="campaign_goal">Goal (number of signatures)</string>
     <string name="campaign_url">Your campaign website</string>
+    <string name="image_url">Campaign image URL (jpg or png)</string>
 
     <string-array name="category_array">
         <item>Support individual</item>

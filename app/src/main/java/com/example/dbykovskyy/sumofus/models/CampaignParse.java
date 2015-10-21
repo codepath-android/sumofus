@@ -4,6 +4,7 @@ package com.example.dbykovskyy.sumofus.models;
 import com.parse.GetCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -105,9 +106,12 @@ public class CampaignParse extends ParseObject {
         return text;
     }
 
-    public void setOneImageUrl(String key, JSONStringer imageUrl) {
-        addUnique(key, imageUrl);
-        put(key, imageUrl);
+    public void setOneImageUrl(String imageUrl) {
+        addUnique("imageUrl", imageUrl);
+    }
+
+    public void setOneImage(ParseFile image) {
+        addUnique("image", image);
     }
 
 

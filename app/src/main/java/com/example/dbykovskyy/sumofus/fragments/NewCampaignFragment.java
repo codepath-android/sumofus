@@ -38,6 +38,7 @@ public class NewCampaignFragment extends Fragment {
     private TextView campaignMessage;
     private TextView campaignGoal;
     private TextView campaignUrl;
+    private TextView campaignImage;
     private Spinner campaignCategory;
 
     @Override
@@ -56,6 +57,7 @@ public class NewCampaignFragment extends Fragment {
         campaignGoal = ((EditText) v.findViewById(R.id.campaign_goal));
         campaignMessage = ((EditText) v.findViewById(R.id.campaign_sign_message));
         campaignUrl = ((EditText) v.findViewById(R.id.campaign_url));
+        campaignImage = ((EditText) v.findViewById(R.id.image_url));
 
         // The campaignCategory spinner lets people assign a general category for their campaign
 
@@ -84,22 +86,20 @@ public class NewCampaignFragment extends Fragment {
             public void onClick(View v) {
                 CampaignParse campaign = ((NewCampaignActivity) getActivity()).getCurrentCampaign();
 
-                // When the user clicks "Save," upload the campaign to Parse
                 // Add data to the campaign object:
                 campaign.setTitle(campaignTitle.getText().toString());
                 campaign.setOverview(campaignOverview.getText().toString());
                 campaign.setDescription(campaignDescription.getText().toString());
                 campaign.setSignMessage(campaignMessage.getText().toString());
-              //  campaign.setGoal(Integer.getInteger( campaignGoal.getText().toString() ));
+                campaign.setGoal(Integer.parseInt(campaignGoal.getText().toString()));
                 campaign.setCampaignUrl(campaignUrl.getText().toString());
-              //  campaign.setOneImageUrl("imageUrl", campaignUrl.getText()); // TODO: Need to convert String to Parse Array element
+                campaign.setOneImageUrl(campaignImage.getText().toString());
+                campaign.setCategory(campaignCategory.getSelectedItem().toString());
 
                 // Associate the campaign with the current user
               //  campaign.setAuthor(ParseUser.getCurrentUser());
 
-                // Add the rating
-                campaign.setCategory(campaignCategory.getSelectedItem().toString());
-
+                // When the user clicks "Save," upload the campaign to Parse
                 // If the user added a photo, that data will be
                 // added in the CameraFragment
 
