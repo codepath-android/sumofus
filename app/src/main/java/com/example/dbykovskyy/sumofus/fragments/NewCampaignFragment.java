@@ -24,6 +24,9 @@ import com.example.dbykovskyy.sumofus.models.CampaignParse;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -109,6 +112,8 @@ public class NewCampaignFragment extends Fragment {
                     @Override
                     public void done(ParseException e) {
                         if (e == null) {
+                            sendPushNotification();
+
                             getActivity().setResult(Activity.RESULT_OK);
                             getActivity().finish();
                         } else {
@@ -118,7 +123,6 @@ public class NewCampaignFragment extends Fragment {
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
-
                 });
 
             }
@@ -138,5 +142,11 @@ public class NewCampaignFragment extends Fragment {
         return v;
     }
 
+    private void sendPushNotification() {
+        ParsePush push = new ParsePush();
+        push.setChannel("NewCampaigns");
+        push.setMessage("New campaign available!");
+        push.sendInBackground();
+    }
 
 }
