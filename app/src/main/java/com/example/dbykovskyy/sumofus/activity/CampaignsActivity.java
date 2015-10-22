@@ -1,23 +1,18 @@
 package com.example.dbykovskyy.sumofus.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.adapter.CampaignItemAdapter;
+import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.models.CampaignParse;
-import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.parse.FindCallback;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -39,6 +34,7 @@ public class CampaignsActivity extends AppCompatActivity {
     String oneMOreImage; //= "http://www.drayan.com/images/painting/small_sunrise.jpg";
     String shortDescriptoin; //= "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
     String longDescriptoin;  //= "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
+    //Andres test pull
 
     private static final int MY_SCAN_REQUEST_CODE = 765;
     private ArrayList<Campaign> campaigns;
@@ -219,5 +215,6 @@ public class CampaignsActivity extends AppCompatActivity {
         // MY_SCAN_REQUEST_CODE is arbitrary and is only used within this activity.
         startActivityForResult(scanIntent, MY_SCAN_REQUEST_CODE);
     }
+
 
 }
