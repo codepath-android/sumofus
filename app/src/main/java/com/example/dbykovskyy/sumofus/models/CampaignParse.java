@@ -106,9 +106,12 @@ public class CampaignParse extends ParseObject {
         return text;
     }
 
-    public void setOneImageUrl(String key, JSONStringer imageUrl) {
-        addUnique(key, imageUrl);
-        put(key, imageUrl);
+    public void setImageUrl(String imageUrl) {
+        addUnique("imageUrl", imageUrl);
+    }
+
+    public void setOneImage(ParseFile image) {
+        addUnique("image", image);
     }
 
 

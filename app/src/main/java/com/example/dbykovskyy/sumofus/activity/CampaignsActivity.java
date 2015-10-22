@@ -24,6 +24,7 @@ import com.parse.ParseACL;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -61,9 +62,17 @@ public class CampaignsActivity extends AppCompatActivity {
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
             setupParse();
             populateCampaignsParse();
+
+            // Eventually, subscribe user to receive Push notifications when then Opt-in. FOr testing purposes, all of the users are subscribed.
+            subscribeUserToChannel();
             //populateCampaigns();
         }
 
+    }
+
+    private void subscribeUserToChannel() {
+
+        ParsePush.subscribeInBackground("NewCampaigns");
     }
 
     @Override

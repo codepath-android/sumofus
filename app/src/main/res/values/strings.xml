@@ -17,14 +17,13 @@
     <string name="take_action">Take Action</string>
     <string name="create_campaign">Create Campaign</string>
 
-
-    <string name="campaign_label">Campaign title</string>
-    <string name="campaign_description">Description</string>
-    <string name="campaign_title">Title</string>
-    <string name="campaign_overview">Overview</string>
-    <string name="campaign_sign_message">Suggested support message</string>
-    <string name="campaign_goal">Supporters goal</string>
+    <string name="campaign_title">Title *</string>
+    <string name="campaign_overview">Overview *</string>
+    <string name="campaign_description">Description *</string>
+    <string name="campaign_sign_message">Suggested action message to support</string>
+    <string name="campaign_goal">Goal (number of signatures)</string>
     <string name="campaign_url">Your campaign website</string>
+    <string name="image_url">Campaign image URL (jpg or png)</string>
 
     <string-array name="category_array">
         <item>Support individual</item>
