@@ -32,9 +32,9 @@ import java.lang.annotation.Target;
 import java.util.ArrayList;
 
 
-public class CampaignItemAdapter extends ArrayAdapter<Campaign> implements
+public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
 
-
+/*
         YouTubePlayer.OnInitializedListener {
 
     private static final int RECOVERY_REQUEST = 1;
@@ -57,7 +57,9 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> implements
             Toast.makeText(getContext(), "Some youtube error", Toast.LENGTH_LONG).show();
         }
 
-    }
+    }*/
+
+    final int screenSize = DeviceDimensionsHelper.getDisplayWidth(getContext());
 
     static class ViewHolder  {
 
@@ -100,7 +102,7 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> implements
 
         viewHolder.ivCampaign.setImageResource(0);
 
-        Picasso.with(getContext()).load(campaign.getImageUrl()).resize(DeviceDimensionsHelper.getDisplayWidth(getContext()),0) .into(viewHolder.ivCampaign);
+        Picasso.with(getContext()).load(campaign.getImageUrl()).resize(screenSize, 0).into(viewHolder.ivCampaign);
 
 /*        Picasso.with(getContext()).load(campaign.getImageUrl()).into(new com.squareup.picasso.Target() {
             @Override
