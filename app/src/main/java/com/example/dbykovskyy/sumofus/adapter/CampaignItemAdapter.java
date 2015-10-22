@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.dbykovskyy.sumofus.activity.CampaignDetailActivity;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.R;
+import com.example.dbykovskyy.sumofus.utils.BitmapScaler;
 import com.example.dbykovskyy.sumofus.utils.Config;
 import com.example.dbykovskyy.sumofus.utils.DeviceDimensionsHelper;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -96,15 +97,17 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> implements
 
         //setting up views
         viewHolder.tvShortCampaignDescription.setText(campaign.getShortDescription());
+
         viewHolder.ivCampaign.setImageResource(0);
 
-        Picasso.with(getContext()).load(campaign.getImageUrl()).into(new com.squareup.picasso.Target() {
+        Picasso.with(getContext()).load(campaign.getImageUrl()).resize(DeviceDimensionsHelper.getDisplayWidth(getContext()),0) .into(viewHolder.ivCampaign);
+
+/*        Picasso.with(getContext()).load(campaign.getImageUrl()).into(new com.squareup.picasso.Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
-                double width = bitmap.getWidth();
-                double height = bitmap.getHeight();
-                //double [] newDimensions = calculateNewDimentions(width, height);
+                //int width = bitmap.getWidth();
+                //int height = bitmap.getHeight();
 
                 viewHolder.pb.setVisibility(ProgressBar.INVISIBLE);
                 viewHolder.ivCampaign.setImageBitmap(bitmap);
@@ -121,8 +124,7 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> implements
                 viewHolder.pb.setVisibility(ProgressBar.VISIBLE);
 
             }
-        });
-
+        });*/
         //setting onclick listener of the image
 
         viewHolder.ivCampaign.setOnClickListener(new View.OnClickListener() {

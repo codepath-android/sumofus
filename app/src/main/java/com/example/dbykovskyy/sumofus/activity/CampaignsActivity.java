@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.example.dbykovskyy.sumofus.models.Campaign;
@@ -103,9 +104,9 @@ public class CampaignsActivity extends AppCompatActivity {
         Campaign camp;
         for (int i = 0; i <= 10; i++) {
             if(i==4){
-                camp = new Campaign(oneMOreImage, shortDescriptoin, longDescriptoin);
+                camp = new Campaign(oneMOreImage, shortDescriptoin, longDescriptoin, "123", "someurl");
             }else {
-                camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin);
+                camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin, "123", "someurl");
             }
 
             campaigns.add(camp);
@@ -121,7 +122,8 @@ public class CampaignsActivity extends AppCompatActivity {
             @Override
             public void done(List<CampaignParse> list, ParseException e) {
                 for (CampaignParse c : list) {
-                    Campaign camp = new Campaign(c.getCampaignUrl(), c.getOverview(), c.getDescription());
+                    Campaign camp = new Campaign(c.getCampaignUrl(), c.getOverview(), c.getDescription(), c.getObjectId(), c.getmainImageMain().getUrl());
+
                     campaigns.add(camp);
                     Log.d("DEBUG:", c.getDescription());
                 }
