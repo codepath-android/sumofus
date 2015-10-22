@@ -101,7 +101,7 @@ public class CampaignItemAdapter extends ArrayAdapter<Campaign> {
         viewHolder.tvShortCampaignDescription.setText(campaign.getShortDescription());
 
         viewHolder.ivCampaign.setImageResource(0);
-        Picasso.with(getContext()).load(campaign.getImageUrl()).resize(screenSize, 0).into(viewHolder.ivCampaign);
+        Picasso.with(getContext()).load(campaign.getImageUrl()).placeholder(R.drawable.ic_no_image).resize(screenSize, 0).into(viewHolder.ivCampaign);
 
 
 /*        Picasso.with(getContext()).load(campaign.getImageUrl()).into(new com.squareup.picasso.Target() {
