@@ -17,14 +17,14 @@ public class Campaign implements Serializable{
     private String imageMainUrl;
     private String objectId;
 
-    public Campaign(String iUrl, String sDescription, String lDescription, String objId, String mainUrl){
+    public Campaign(String iUrl, String sDescription, String lDescription, String objId, ParseFile mainUrl){
 
         imageUrl=iUrl;
         shortDescription=sDescription;
         longDescription=lDescription;
        // longDescription=campText;
         objectId=objId;
-        imageUrl = mainUrl;
+        imageUrl = getImageMainUrl(mainUrl);
 
     }
 
@@ -53,8 +53,11 @@ public class Campaign implements Serializable{
         this.imageUrl = imageUrl;
     }
 
-    public String getImageMainUrl() {
-        return imageMainUrl;
+    public String getImageMainUrl(ParseFile pf) {
+        if(pf!=null){
+            return pf.getUrl();
+        }
+        return null;
     }
 
     public void setImageMainUrl(String imageMainUrl) {

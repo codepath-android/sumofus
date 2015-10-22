@@ -23,6 +23,7 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
@@ -39,6 +40,7 @@ public class CampaignsActivity extends AppCompatActivity {
     String oneMOreImage; //= "http://www.drayan.com/images/painting/small_sunrise.jpg";
     String shortDescriptoin; //= "The third-largest palm oil corporation in the world is exploiting refugees and clearing rainforests";
     String longDescriptoin;  //= "Standard Chartered, a massive international bank, is about to bankroll a Malaysian palm oil producer responsible for horrific slave-labour conditions and widespread environmental destruction.";
+    ParseFile testFile;
 
     private static final int MY_SCAN_REQUEST_CODE = 765;
     private ArrayList<Campaign> campaigns;
@@ -113,9 +115,9 @@ public class CampaignsActivity extends AppCompatActivity {
         Campaign camp;
         for (int i = 0; i <= 10; i++) {
             if(i==4){
-                camp = new Campaign(oneMOreImage, shortDescriptoin, longDescriptoin, "123", "someurl");
+                camp = new Campaign(oneMOreImage, shortDescriptoin, longDescriptoin, "123", testFile);
             }else {
-                camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin, "123", "someurl");
+                camp = new Campaign(imageUrl, shortDescriptoin, longDescriptoin, "123", testFile);
             }
 
             campaigns.add(camp);
@@ -131,8 +133,7 @@ public class CampaignsActivity extends AppCompatActivity {
             @Override
             public void done(List<CampaignParse> list, ParseException e) {
                 for (CampaignParse c : list) {
-                    Campaign camp = new Campaign(c.getCampaignUrl(), c.getOverview(), c.getDescription(), c.getObjectId(), c.getmainImageMain().getUrl());
-
+                    Campaign camp = new Campaign(c.getCampaignUrl(), c.getOverview(), c.getDescription(), c.getObjectId(), c.getmainImageMain());
                     campaigns.add(camp);
                     Log.d("DEBUG:", c.getDescription());
                 }
@@ -153,10 +154,12 @@ public class CampaignsActivity extends AppCompatActivity {
         ParseObject.registerSubclass(CampaignParse.class);
         Parse.initialize(this);
         ParseUser.enableAutomaticUser();
+
         ParseACL defaultACL = new ParseACL();
+        defaultACL.setPublicReadAccess(true);
         //  Public read access.
         // defaultACL.setPublicReadAccess(true);
-        ParseACL.setDefaultACL(defaultACL, true);
+        //ParseACL.setDefaultACL(defaultACL, true);
         // ParseAnalytics.trackAppOpenedInBackground(getIntent());
     }
 
