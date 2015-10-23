@@ -1,22 +1,16 @@
 package com.example.dbykovskyy.sumofus.activity;
 
 import android.app.Activity;
-
 import android.content.Intent;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.ShareActionProvider;
-
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +24,11 @@ import com.example.dbykovskyy.sumofus.R;
 import com.example.dbykovskyy.sumofus.models.Campaign;
 import com.example.dbykovskyy.sumofus.utils.BitmapScaler;
 import com.example.dbykovskyy.sumofus.utils.CustomProgress;
-import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.MessageDialog;
+import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -46,16 +44,29 @@ public class CampaignDetailActivity extends AppCompatActivity {
     private static final int PICK_PHOTO_CODE = 2;
     private static final int CROP_PHOTO_CODE = 3;
     private static final int POST_PHOTO_CODE = 4;
-
-    private Uri photoUri;
-    private Bitmap photoBitmap;
-
     TextView tvCampaignText;
     ImageView ivCampaignImage;
     CustomProgress customProgress;
     Button btSignPetition;
     TextView tvOurGoalIs;
+    private Uri photoUri;
+    private Bitmap photoBitmap;
 
+    //this is to create picture filename
+    private static File getOutputMediaFile() {
+        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES), "sumofus");
+        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
+            return null;
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
+        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
+                "IMG_"+ timeStamp + ".jpg");
+
+        return mediaFile;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +118,6 @@ public class CampaignDetailActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -139,7 +148,8 @@ public class CampaignDetailActivity extends AppCompatActivity {
             break;
             case  R.id.action_share:
             {
-                setupShareIntent();
+                setupFacebookShareIntent();
+                //setupShareIntent();
             }
             break;
         }
@@ -207,21 +217,27 @@ public class CampaignDetailActivity extends AppCompatActivity {
     }
 
 
-    //this is to create picture filename
-    private static File getOutputMediaFile() {
-        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), "sumofus");
-        if (!mediaStorageDir.exists() && !mediaStorageDir.mkdirs()){
-            return null;
-        }
+    //Share with Facebook
+    //We will need to add two share buttons one for FB and one to share with other apps.
+    //Facebook doesn't work well with normal sharing intents when sharing multiple content elements as discussed in this bug: https://developers.facebook.com/x/bugs/332619626816423/
 
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
-        File mediaFile = new File(mediaStorageDir.getPath() + File.separator +
-                "IMG_"+ timeStamp + ".jpg");
+    public void setupFacebookShareIntent() {
+        ShareDialog shareDialog;
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        shareDialog = new ShareDialog(this);
 
-        return mediaFile;
+        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                .setContentTitle("SumOfUs")
+                .setContentDescription(
+                        "\"Title Of Test Post\"")
+                .setContentUrl(Uri.parse("http://www.sumofus.org"))
+                .build();
+
+        shareDialog.show(linkContent);
+
+        //MessageDialog.show(this, linkContent);
     }
+
 
 
     // Gets the image URI and setup the associated share intent to hook into the provider
@@ -237,7 +253,7 @@ public class CampaignDetailActivity extends AppCompatActivity {
             shareIntent.setAction(Intent.ACTION_SEND);
             shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Title Of Test Post");
-            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.sumofus.com");
+            shareIntent.putExtra(Intent.EXTRA_TEXT, "https://www.sumofus.org");
             shareIntent.setType("image/*");
             // Launch sharing dialog for image
             startActivity(Intent.createChooser(shareIntent, "send"));
