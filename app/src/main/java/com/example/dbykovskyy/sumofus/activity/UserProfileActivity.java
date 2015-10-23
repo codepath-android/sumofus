@@ -1,5 +1,7 @@
 package com.example.dbykovskyy.sumofus.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,8 +10,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dbykovskyy.sumofus.R;
+import com.facebook.FacebookSdk;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.makeramen.roundedimageview.RoundedTransformationBuilder;
+import com.parse.ParseUser;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
@@ -66,10 +72,18 @@ public class UserProfileActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.logout) {
+            //return true;
+            LogOut();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void LogOut() {
+        ParseUser.logOut();
+        Intent intent = new Intent(UserProfileActivity.this, DispatchActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

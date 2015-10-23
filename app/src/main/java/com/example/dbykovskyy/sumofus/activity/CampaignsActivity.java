@@ -59,17 +59,15 @@ public class CampaignsActivity extends AppCompatActivity {
         lvCampaigns.setAdapter(adapterCampaigns);
 
         //populateCampaigns();
-
         //fetching Campaigns from Parse to our empty Collection
         if (!ParseCrashReporting.isCrashReportingEnabled()) {
-            setupParse();
+           // setupParse();
             populateCampaignsParse();
 
             // Eventually, subscribe user to receive Push notifications when then Opt-in. FOr testing purposes, all of the users are subscribed.
             subscribeUserToChannel();
             //populateCampaigns();
-        }
-
+       }
     }
 
     private void subscribeUserToChannel() {
